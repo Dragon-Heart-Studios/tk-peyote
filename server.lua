@@ -1,5 +1,28 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+Logo = [[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+@@@@@@@  @@@  @@@             @@@@@@@   @@@@@@@@  @@@ @@@   @@@@@@   @@@@@@@  @@@@@@@@  
+@@@@@@@  @@@  @@@             @@@@@@@@  @@@@@@@@  @@@ @@@  @@@@@@@@  @@@@@@@  @@@@@@@@  
+  @@!    @@!  !@@             @@!  @@@  @@!       @@! !@@  @@!  @@@    @@!    @@!       
+  !@!    !@!  @!!             !@!  @!@  !@!       !@! @!!  !@!  @!@    !@!    !@!       
+  @!!    @!@@!@!   @!@!@!@!@  @!@@!@!   @!!!:!     !@!@!   @!@  !@!    @!!    @!!!:!    
+  !!!    !!@!!!    !!!@!@!!!  !!@!!!    !!!!!:      @!!!   !@!  !!!    !!!    !!!!!:    
+  !!:    !!: :!!              !!:       !!:         !!:    !!:  !!!    !!:    !!:       
+  :!:    :!:  !:!             :!:       :!:         :!:    :!:  !:!    :!:    :!:       
+   ::     ::  :::              ::        :: ::::     ::    ::::: ::     ::     :: ::::  
+   :      :   :::              :        : :: ::      :      : :  :      :     : :: ::   
+]]
+
+function GetCurrentVersion()
+	return GetResourceMetadata( GetCurrentResourceName(), "version" )
+end
+
+CreateThread(function()
+    print(Logo) 
+    curVer = GetCurrentVersion()
+    print( "Tk-Peyote || Current version: " .. curVer )             
+end)
+
 QBCore.Functions.CreateUseableItem("bluepeyoteplant", function(source, item)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
