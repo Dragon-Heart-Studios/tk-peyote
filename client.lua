@@ -61,38 +61,10 @@ end)
 function PeyoteEffect()
    local ped = PlayerPedId()
    local randomSpawn = math.random(1,14)
-   local ranmodel
-   if randomSpawn == 1 then
-      ranmodel = 'a_c_boar'
-    elseif randomSpawn == 2 then
-      ranmodel = 'a_c_chickenhawk'
-   elseif randomSpawn == 3 then
-      ranmodel = 'a_c_chimp'
-   elseif randomSpawn == 4 then
-      ranmodel = 'a_c_cormorant'
-   elseif randomSpawn == 5 then
-      ranmodel = 'a_c_cow'
-   elseif randomSpawn == 6 then
-      ranmodel = 'a_c_coyote'
-   elseif randomSpawn == 7 then
-      ranmodel = 'a_c_crow'
-   elseif randomSpawn == 8 then
-      ranmodel = 'a_c_deer'
-   elseif randomSpawn == 9 then
-      ranmodel = 'a_c_mtlion'
-   elseif randomSpawn == 10 then
-      ranmodel = 'a_c_pig'
-   elseif randomSpawn == 11 then
-      ranmodel = 'a_c_pigeon'
-   elseif randomSpawn == 12 then
-      ranmodel = 'a_c_rabbit_01'
-   elseif randomSpawn == 13 then
-      ranmodel = 'a_c_rat'
-   else
-      ranmodel = 'a_c_seagull'
-   end
-   local model = GetHashKey(ranmodel)
-   local setbackmodel = GetHashKey('a_m_y_skater_01')
+   local animals = { 'a_c_boar', 'a_c_chickenhawk', 'a_c_chimp', 'a_c_cormorant', 'a_c_cow', 'a_c_coyote', 'a_c_crow', 'a_c_deer', 'a_c_mtlion', 'a_c_pig', 'a_c_pigeon', 'a_c_rabbit_01', 'a_c_rat', 'a_c_seagull' }
+   local random_animal = animals[math.random(1,#animals)]
+   local model = GetHashKey(random_animal)
+   local fallback_model = GetHashKey('a_m_y_skater_01')
    RequestModel(model)
         while not HasModelLoaded(model) do
             RequestModel(model)
@@ -115,9 +87,9 @@ function PeyoteEffect()
    StopScreenEffect("PeyoteIn")
    StopScreenEffect("PeyoteOut")
    Wait(600000)
-   RequestModel(setbackmodel)
-        while not HasModelLoaded(setbackmodel) do
-            RequestModel(setbackmodel)
+   RequestModel(fallback_model)
+        while not HasModelLoaded(fallback_model) do
+            RequestModel(fallback_model)
             Citizen.Wait(0)
         end
    StartScreenEffect("PeyoteEndIn", 3.0, 0)
@@ -125,10 +97,9 @@ function PeyoteEffect()
    DoScreenFadeOut(1000)
    SetPedToRagdoll(ped, math.random(1000, 3000), math.random(1000, 3000), 3, 0, 0, 0)
    Wait(10000)
-   SetPlayerModel(PlayerId(), setbackmodel)
+   SetPlayerModel(PlayerId(), fallback_model)
    DoScreenFadeIn(1000)
    StopScreenEffect("PeyoteEndIn")
    StopScreenEffect("PeyoteEndOut")
    QBCore.Functions.Notify("The effects wore off things seem to be normal now [Change Your Skin]", "success")
 end
-
