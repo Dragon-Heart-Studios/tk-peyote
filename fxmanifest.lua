@@ -2,7 +2,7 @@ fx_version 'cerulean'
 game 'gta5'
 
 description 'Tk-Peyote'
-version '1.0.0'
+version '1.0.5'
 
 server_scripts {
     'server.lua'

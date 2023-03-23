@@ -19,7 +19,7 @@
 	["whitepeyoteplant"] 				 = {["name"] = "whitepeyoteplant", 			    		["label"] = "Odd Plant", 			["weight"] = 0, 		["type"] = "item", 		["image"] = "whitepeyote.png", 				["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,	["description"] = "A Strange Looking White Flowered Plant"},
 ```
 
-**2: Add The Images in the image folder to [qb]/[qb-inventory]/html/images**
+**2: Add The Images in the image folder to [qb]/[lj-inventory]/html/images**
 
 **4: Paste tk-peyote In Your a Folder In Resources And Ensure It To Your Server.cfg** 
 

@@ -1,27 +1,23 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-Logo = [[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-@@@@@@@  @@@  @@@             @@@@@@@   @@@@@@@@  @@@ @@@   @@@@@@   @@@@@@@  @@@@@@@@  
-@@@@@@@  @@@  @@@             @@@@@@@@  @@@@@@@@  @@@ @@@  @@@@@@@@  @@@@@@@  @@@@@@@@  
-  @@!    @@!  !@@             @@!  @@@  @@!       @@! !@@  @@!  @@@    @@!    @@!       
-  !@!    !@!  @!!             !@!  @!@  !@!       !@! @!!  !@!  @!@    !@!    !@!       
-  @!!    @!@@!@!   @!@!@!@!@  @!@@!@!   @!!!:!     !@!@!   @!@  !@!    @!!    @!!!:!    
-  !!!    !!@!!!    !!!@!@!!!  !!@!!!    !!!!!:      @!!!   !@!  !!!    !!!    !!!!!:    
-  !!:    !!: :!!              !!:       !!:         !!:    !!:  !!!    !!:    !!:       
-  :!:    :!:  !:!             :!:       :!:         :!:    :!:  !:!    :!:    :!:       
-   ::     ::  :::              ::        :: ::::     ::    ::::: ::     ::     :: ::::  
-   :      :   :::              :        : :: ::      :      : :  :      :     : :: ::   
-]]
+local resourceName = GetCurrentResourceName()
+local version = "1.0.5" -- Change this to your script's current version
 
-function GetCurrentVersion()
-	return GetResourceMetadata( GetCurrentResourceName(), "version" )
-end
-
-CreateThread(function()
-    print(Logo) 
-    curVer = GetCurrentVersion()
-    print( "Tk-Peyote || Current version: " .. curVer )             
-end)
+PerformHttpRequest("https://supernovaservers.com/assets/FiveMScriptVersions/tk-peyote/version.txt", function(statusCode, response, headers)
+    if statusCode == 200 then
+        if response ~= version then
+            print( "^7Tk-Peyote || ^6Developed By Tkiljoy^7 || Published By: TK Developments" )
+            print("^4Version: ".."^1Your version of " .. resourceName .. " ^1is out of date. The latest version is " .. response)
+        else
+            print( "^7Tk-Peyote || ^6Developed By Tkiljoy^7 || Published By: TK Developments" )
+            print("^4Version: ".."^2Your version of " .. resourceName .. " ^2is up to date.")
+        end
+    else
+        -- print("Failed to check for updates. Error code: " .. statusCode)
+        print( "^7Tk-Peyote || ^6Developed By Tkiljoy^7 || Published By: TK Developments" )
+        print('^1Error: Failed to check for updates. Error code: ' .. statusCode)
+    end
+end, "GET", "", {})
 
 QBCore.Functions.CreateUseableItem("bluepeyoteplant", function(source, item)
     local src = source
