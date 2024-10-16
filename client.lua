@@ -1,61 +1,22 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-local PlayerData = QBCore.Functions.GetPlayerData()
-local isLoggedIn = LocalPlayer.state.isLoggedIn
-
-RegisterNetEvent('tk-peyote:client:bluepeyote', function()
-   QBCore.Functions.Progressbar("peyote", "Eating Strange Plant...", math.random(3000, 6000), false, true, {
-       disableMovement = false,
-       disableCarMovement = false,
-       disableMouse = false,
-       disableCombat = true,
-   }, {}, {}, {}, function() -- Done
-      QBCore.Functions.Notify("Plant Tasted Ok. You Feel Fine", "success")
-       PeyoteEffect()
-   end, function() -- Cancel
-       QBCore.Functions.Notify("Cancelled..", "error")
-   end)
-end)
-
-RegisterNetEvent('tk-peyote:client:pinkpeyote', function()
-   QBCore.Functions.Progressbar("peyote", "Eating Strange Plant...", math.random(3000, 6000), false, true, {
-       disableMovement = false,
-       disableCarMovement = false,
-       disableMouse = false,
-       disableCombat = true,
-   }, {}, {}, {}, function() -- Done
-      QBCore.Functions.Notify("Plant Tasted Ok. You Feel Fine", "success")
-       PeyoteEffect()
-   end, function() -- Cancel
-       QBCore.Functions.Notify("Cancelled..", "error")
-   end)
-end)
-
-RegisterNetEvent('tk-peyote:client:whitepeyote', function()
-   QBCore.Functions.Progressbar("peyote", "Eating Strange Plant...", math.random(3000, 6000), false, true, {
-       disableMovement = false,
-       disableCarMovement = false,
-       disableMouse = false,
-       disableCombat = true,
-   }, {}, {}, {}, function() -- Done
-      QBCore.Functions.Notify("Plant Tasted Ok. You Feel Fine", "success")
-       PeyoteEffect()
-   end, function() -- Cancel
-       QBCore.Functions.Notify("Cancelled..", "error")
-   end)
-end)
-
-RegisterNetEvent('tk-peyote:client:yellowpeyote', function()
-   QBCore.Functions.Progressbar("peyote", "Eating Strange Plant...", math.random(3000, 6000), false, true, {
-       disableMovement = false,
-       disableCarMovement = false,
-       disableMouse = false,
-       disableCombat = true,
-   }, {}, {}, {}, function() -- Done
-      QBCore.Functions.Notify("Plant Tasted Ok. You Feel Fine", "success")
-       PeyoteEffect()
-   end, function() -- Cancel
-       QBCore.Functions.Notify("Cancelled..", "error")
-   end)
+RegisterNetEvent('DHS-Peyote:client:peyoteEffect', function()
+   Framework.ProgressBar({
+      duration = math.random(3000, 6000),
+      label = "Eating Strange Plant...",
+      canCancel = true,
+      disable = {
+          move = true,
+          vehicle = true,
+          combat = true,
+          mouse = false
+      },
+      onFinish = function()
+         Framework.Notify("Plant Tasted Ok. You Feel Fine", "success")
+         PeyoteEffect()
+      end,
+      onCancel = function()
+         Framework.Notify("Cancelled..", "error")
+      end
+  })
 end)
 
 function PeyoteEffect()
@@ -94,16 +55,16 @@ function PeyoteEffect()
    local model = GetHashKey(ranmodel)
    local setbackmodel = GetHashKey('a_m_y_skater_01')
    RequestModel(model)
-        while not HasModelLoaded(model) do
-            RequestModel(model)
-            Citizen.Wait(0)
-        end
+      while not HasModelLoaded(model) do
+         RequestModel(model)
+         Wait(0)
+      end
    Wait(240000)
-   QBCore.Functions.Notify("Mouth Begins to Get Dry", "success")
+   Framework.Notify("Mouth Begins to Get Dry", "success")
    Wait(30000)
-   QBCore.Functions.Notify("Head is Pounding, and You begin to sweat", "success")
+   Framework.Notify("Head is Pounding, and You begin to sweat", "success")
    Wait(10000)
-   QBCore.Functions.Notify("You feel sharp pains in all your bones", "success")
+   Framework.Notify("You feel sharp pains in all your bones", "success")
    Wait(10000)
    StartScreenEffect("PeyoteIn", 3.0, 0)
    StartScreenEffect("PeyoteOut", 3.0, 0)
@@ -116,10 +77,10 @@ function PeyoteEffect()
    StopScreenEffect("PeyoteOut")
    Wait(600000)
    RequestModel(setbackmodel)
-        while not HasModelLoaded(setbackmodel) do
-            RequestModel(setbackmodel)
-            Citizen.Wait(0)
-        end
+      while not HasModelLoaded(setbackmodel) do
+         RequestModel(setbackmodel)
+         Wait(0)
+      end
    StartScreenEffect("PeyoteEndIn", 3.0, 0)
    StartScreenEffect("PeyoteEndOut", 3.0, 0)
    DoScreenFadeOut(1000)
@@ -129,6 +90,6 @@ function PeyoteEffect()
    DoScreenFadeIn(1000)
    StopScreenEffect("PeyoteEndIn")
    StopScreenEffect("PeyoteEndOut")
-   QBCore.Functions.Notify("The effects wore off things seem to be normal now [Change Your Skin]", "success")
+   Framework.Notify("The effects wore off things seem to be normal now [Change Your Skin]", "success")
 end
 

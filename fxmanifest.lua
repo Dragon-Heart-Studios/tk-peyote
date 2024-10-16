@@ -1,15 +1,18 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'Tk-Peyote'
-version '1.0.5'
+description 'DHS-Peyote'
+version '1.1.0'
+
+use_experimental_fxv2_oal 'yes'
+bridge 'DHS-Bridge'
 
 server_scripts {
     'server.lua'
 }
 
 shared_scripts {
-    'config.lua',
+    '@DHS-Bridge/bridge.lua',
 }
 
 client_scripts {
@@ -21,4 +24,4 @@ lua54 'yes'
 escrow_ignore {
     'server.lua',
     'client.lua'
-  }
+}
